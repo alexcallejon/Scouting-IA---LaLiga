@@ -26,3 +26,35 @@ El proyecto simula un entorno de producción real dividiendo el proceso en 4 scr
 
 ##  Notas sobre los Datos
 Los datos utilizados provienen del tier *Open Data* de StatsBomb. Para la competición evaluada (LaLiga 20/21), el proveedor incluye exclusivamente los partidos disputados por el FC Barcelona ("Messi Data Biography"). El pipeline está preparado para procesar el 100% de la liga introduciendo credenciales de pago en la API.
+
+## Instalación y Uso
+
+Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
+
+1. **Clonar el repositorio:**
+   ```bash
+   git clone [https://github.com/alexcallejon/scouting-ia-laliga.git](https://github.com/alexcallejon/scouting-ia-laliga.git)
+   cd scouting-ia-laliga
+   ```
+
+2. **Instalar las dependencias:**
+   Se recomienda crear un entorno virtual previamente. Luego, instala las librerías necesarias ejecutando:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Configurar la Base de Datos:**
+   * Crea una base de datos local en PostgreSQL llamada `laliga_xt`.
+   * Abre el archivo `05_produccion.py` e introduce tu contraseña local de Postgres en la variable correspondiente.
+
+4. **Ejecutar el Pipeline de Datos:**
+   Este script descargará los datos de la API, entrenará la IA con el 80% de la temporada (J1-J28) y volcará las predicciones del 20% de prueba en tu base de datos (puede tardar unos 10-15 minutos):
+   ```bash
+   python 05_produccion.py
+   ```
+
+5. **Lanzar el Dashboard:**
+   Una vez terminada la carga en la base de datos, arranca la interfaz web interactiva:
+   ```bash
+   streamlit run app.py
+   ```
